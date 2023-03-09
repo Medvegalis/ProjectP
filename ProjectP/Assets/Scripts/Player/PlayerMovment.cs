@@ -33,7 +33,6 @@ public class PlayerMovment : MonoBehaviour
     {
         Vector2 move = playerControls.Player.Move.ReadValue<Vector2>().normalized;
         MovePlayer(move);
-        Debug.Log(move);
     }
 
     private void MovePlayer(Vector2 directions)

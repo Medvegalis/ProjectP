@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -51,6 +52,12 @@ public class PauseMenu : MonoBehaviour
     {
         Application.Quit();    
     
+    }
+
+    //For pausing the game on the deathScreen
+    public void SetTimeScaleToZero() 
+    {
+        Time.timeScale = 0f;    
     }
 
 
