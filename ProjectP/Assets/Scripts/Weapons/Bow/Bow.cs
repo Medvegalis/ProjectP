@@ -28,7 +28,7 @@ public class Bow : MonoBehaviour
 
     private void CheckInputAndShoot() 
     {
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0) && Time.timeScale !=0) 
         {
             Shoot();
         }
@@ -36,10 +36,15 @@ public class Bow : MonoBehaviour
 
     private void Shoot()
     { 
+        //Gets the agle of the bow
+        float angle = Utility.AngleTowardsMouse(BowPoint.position);
+        //rotates 90 degress so it shots forward
+        Quaternion rot = Quaternion.Euler(new Vector3(0f, 0f, angle+90f));
+        
         var arrow = Instantiate(
             ArrowPrefab,
             BowPoint.position,
-            transform.rotation
+            rot
         );
 
         var arrowScript = arrow.GetComponent<Arrow>();

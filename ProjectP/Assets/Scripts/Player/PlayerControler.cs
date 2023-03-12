@@ -8,6 +8,8 @@ public class PlayerControler : MonoBehaviour
     private PlayerControls playerControls;
     private GameObject player;
 
+    [SerializeField] private GameObject weapon;
+
     private Rigidbody2D playerRB;
 
     [SerializeField] private float moveSpeed = 2f;
@@ -19,6 +21,8 @@ public class PlayerControler : MonoBehaviour
         player = GetComponent<GameObject>();
         playerRB = GetComponent<Rigidbody2D>();
         controlsEnabled = true;
+
+        Physics2D.IgnoreLayerCollision(6,7);
     }
 
     private void OnEnable()
@@ -35,7 +39,7 @@ public class PlayerControler : MonoBehaviour
 
     private void Update()
     {
-        if (controlsEnabled)
+        if (controlsEnabled && Time.timeScale != 0)
         {
             LookAtMouse();
         }
@@ -50,9 +54,12 @@ public class PlayerControler : MonoBehaviour
 
     private void LookAtMouse() 
     {
-        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        //var angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+        //weapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        float angle = Utility.AngleTowardsMouse(weapon.transform.position);
+		weapon.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
     }
 
 
