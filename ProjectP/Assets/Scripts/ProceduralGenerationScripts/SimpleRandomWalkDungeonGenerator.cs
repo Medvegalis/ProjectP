@@ -1,39 +1,33 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class SimpleRandomWalkDungeonGenerator : MonoBehaviour
+public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 {
-    [SerializeField] //Allows to edit the field in the 3D inspector
-   protected Vector2Int startPosition = Vector2Int.zero;
     [SerializeField]
-   private int iterations = 10;
-   [SerializeField]
-   public int walkLength = 10;
-   [SerializeField]
-   public bool startEachIteration = true;
+    private SimpleRandomWalkSO randomWalkParameters;
 
-    [SerializeField] 
-    private TilemapVisualizer tilemapVisualizer;
-
-    public void RunProceduralGeneration()
+    protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRandomWalk();
+        tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTiles(floorPositions);
+        WallGenerator.CreateWalls(floorPositions, tilemapVisualizer);
     }
 
     protected HashSet<Vector2Int> RunRandomWalk()
     {
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-        for(int i = 0; i < iterations; i++)
+        for (int i = 0; i < randomWalkParameters.iterations; i++)
         {
-            var path = ProceduralGenerationAlgorithms.SimpleRandomWalk(currentPosition, walkLength);
-            floorPositions.UnionWith(path); //Copying positions from path to floor positions
-            if(startEachIteration)
-                currentPosition = floorPositions.ElementAt(UnityEngine.Random.Range(0, floorPositions.Count));
+            var path = ProceduralGenerationAlgorithms.SimpleRandomWalk(currentPosition, randomWalkParameters.walkLength);
+            floorPositions.UnionWith(path);
+            if (randomWalkParameters.startRandomlyEachIteration)
+                currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
         return floorPositions;
     }

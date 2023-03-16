@@ -1,37 +1,39 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class ProceduralGenerationAlgorithms
 {
-   public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPosition, int walkLength) 
-   {
+    
+    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPosition, int walkLength)
+    {
         HashSet<Vector2Int> path = new HashSet<Vector2Int>();
-        path.Add(startPosition);
-        var prevPosition = startPosition;
 
-        for(int i = 0; i < walkLength; i++)
+        path.Add(startPosition);
+        var previousPosition = startPosition;
+
+        for (int i = 0; i < walkLength; i++)
         {
-            var newPosition = prevPosition + Direction2D.GetRandomCardinalDirection();
+            var newPosition = previousPosition + Direction2D.GetRandomCardinalDirection();
             path.Add(newPosition);
-            prevPosition = newPosition;
+            previousPosition = newPosition;
         }
         return path;
-   }
+    }
 }
 
 public static class Direction2D
 {
-    public static List<Vector2Int> cardinalDirections = new List<Vector2Int>
+    public static List<Vector2Int> cardinalDirectionsList = new List<Vector2Int>
     {
-        Vector2Int.up,
-        Vector2Int.down,
-        Vector2Int.left,
-        Vector2Int.right
+        new Vector2Int(0,1), //UP
+        new Vector2Int(1,0), //RIGHT
+        new Vector2Int(0, -1), // DOWN
+        new Vector2Int(-1, 0) //LEFT
     };
 
     public static Vector2Int GetRandomCardinalDirection()
     {
-        return cardinalDirections[Random.Range(0, cardinalDirections.Count)];
+        return cardinalDirectionsList[Random.Range(0, cardinalDirectionsList.Count)];
     }
 }
