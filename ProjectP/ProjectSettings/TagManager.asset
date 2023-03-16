@@ -50,3 +50,9 @@ TagManager:
   - name: NonBackground
     uniqueID: 1511283101
     locked: 0
+  - name: Player
+    uniqueID: 3946080541
+    locked: 0
+  - name: PlayerWeapon
+    uniqueID: 887976025
+    locked: 0

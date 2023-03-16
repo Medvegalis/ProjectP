@@ -12,7 +12,8 @@ public class PlayerControler : MonoBehaviour
 
     private Rigidbody2D playerRB;
 
-    [SerializeField] private float moveSpeed = 2f;
+    private float moveSpeed;
+    [SerializeField] private float DefaultmoveSpeed = 5f;
 
     // Start is called before the first frame update
     private void Awake()
@@ -21,6 +22,7 @@ public class PlayerControler : MonoBehaviour
         player = GetComponent<GameObject>();
         playerRB = GetComponent<Rigidbody2D>();
         controlsEnabled = true;
+        moveSpeed = DefaultmoveSpeed;
 
         Physics2D.IgnoreLayerCollision(6,7);
     }
@@ -50,6 +52,16 @@ public class PlayerControler : MonoBehaviour
     private void MovePlayer(Vector2 directions)
     {
         playerRB.velocity = directions * moveSpeed;
+    }
+
+    public void ReduceSpeed(float byAmount)
+    {
+        moveSpeed = DefaultmoveSpeed / byAmount;
+    }
+
+      public void ReduceSpeed()
+    {
+        moveSpeed = DefaultmoveSpeed;
     }
 
     private void LookAtMouse() 

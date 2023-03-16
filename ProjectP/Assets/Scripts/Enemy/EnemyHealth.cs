@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField]
-    private bool isInvincible = false;
-    [SerializeField] 
-    private float hurtSpriteColorChangeTime = .2f;
-
-
+    [SerializeField] private bool isInvincible = false;
+    [SerializeField] private float hurtSpriteColorChangeTime = .2f;
     private bool gotHurt;
     private float timeSinceHurt;
     public int health;
@@ -50,6 +46,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            GetComponent<LootBag>().InstantiateLoot(transform.position);
             Destroy(gameObject);
             return;
         }
