@@ -73,7 +73,7 @@ public static class ProceduralGenerationAlgorithms
     private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
     {
         var xSplit = Random.Range(1, room.size.x);
-        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(xSplit, room.min.y, room.min.z));
+        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(xSplit, room.size.y, room.size.z));
         BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x + xSplit, room.min.y, room.min.z),
             new Vector3Int(room.size.x - xSplit, room.size.y, room.size.z));
         roomsQueue.Enqueue(room1);
@@ -99,6 +99,26 @@ public static class Direction2D
         new Vector2Int(1,0), //RIGHT
         new Vector2Int(0, -1), // DOWN
         new Vector2Int(-1, 0) //LEFT
+    };
+
+    public static List<Vector2Int> diagonalDirectionsList = new List<Vector2Int>
+    {
+        new Vector2Int(1,1), //UP-RIGHT
+        new Vector2Int(1,-1), //RIGHT-DOWN
+        new Vector2Int(-1, -1), // DOWN-LEFT
+        new Vector2Int(-1, 1) //LEFT-UP
+    };
+
+    public static List<Vector2Int> eightDirectionsList = new List<Vector2Int>
+    {
+        new Vector2Int(0,1), //UP
+        new Vector2Int(1,1), //UP-RIGHT
+        new Vector2Int(1,0), //RIGHT
+        new Vector2Int(1,-1), //RIGHT-DOWN
+        new Vector2Int(0, -1), // DOWN
+        new Vector2Int(-1, -1), // DOWN-LEFT
+        new Vector2Int(-1, 0), //LEFT
+        new Vector2Int(-1, 1) //LEFT-UP
     };
 
     public static Vector2Int GetRandomCardinalDirection()
