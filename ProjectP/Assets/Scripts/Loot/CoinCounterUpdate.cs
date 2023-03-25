@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Updates the UI coin counter
+/// </summary>
 public class CoinCounterUpdate : MonoBehaviour
 {
     private TextMeshProUGUI coinCounter; 
     private int currentCount = 0;
-    void Awake()
+    void Start()
     {
         coinCounter = GetComponent<TextMeshProUGUI>();
-        Coin.OnCoinCollected += AddToCounter;
+        Coin.OnCollected += AddToCounter;
     }
-
-    public void AddToCounter()
+    private void AddToCounter(int value)
     {
-        currentCount++;
+        currentCount += value;
         coinCounter.text = currentCount.ToString();
     }
 }

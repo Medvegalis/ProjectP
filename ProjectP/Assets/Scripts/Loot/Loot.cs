@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Loot Object
+/// </summary>
 [CreateAssetMenu]
 public class Loot : ScriptableObject
 {

@@ -55,7 +55,6 @@ public class Health : MonoBehaviour
         if(coll.transform.tag == "Enemy")
         {
             IsBeingHit = true;
-
         }
     }
 

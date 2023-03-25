@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface ICollectable
 {
-    public void Collect();
+    public void Collect(int n);
+
+    public void SetTarget(Vector3 v);
 }
