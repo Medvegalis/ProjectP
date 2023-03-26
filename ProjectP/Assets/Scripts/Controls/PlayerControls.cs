@@ -62,6 +62,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwapWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbc7dece-070a-4a2b-ac9f-726908d257b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickUpWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f99de14-c1df-4029-9ea3-72556b587240"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9833d1b-ee01-42e1-bb44-612989985b35"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b26eecb-ff6a-4dc3-9651-258b671f0a14"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""PickUpWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +216,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Fire1 = m_Player.FindAction("Fire1", throwIfNotFound: true);
         m_Player_Fire2 = m_Player.FindAction("Fire2", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_SwapWeapon = m_Player.FindAction("SwapWeapon", throwIfNotFound: true);
+        m_Player_PickUpWeapon = m_Player.FindAction("PickUpWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -241,6 +283,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire1;
     private readonly InputAction m_Player_Fire2;
     private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_SwapWeapon;
+    private readonly InputAction m_Player_PickUpWeapon;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -249,6 +293,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Fire1 => m_Wrapper.m_Player_Fire1;
         public InputAction @Fire2 => m_Wrapper.m_Player_Fire2;
         public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @SwapWeapon => m_Wrapper.m_Player_SwapWeapon;
+        public InputAction @PickUpWeapon => m_Wrapper.m_Player_PickUpWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -270,6 +316,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Use.started += instance.OnUse;
             @Use.performed += instance.OnUse;
             @Use.canceled += instance.OnUse;
+            @SwapWeapon.started += instance.OnSwapWeapon;
+            @SwapWeapon.performed += instance.OnSwapWeapon;
+            @SwapWeapon.canceled += instance.OnSwapWeapon;
+            @PickUpWeapon.started += instance.OnPickUpWeapon;
+            @PickUpWeapon.performed += instance.OnPickUpWeapon;
+            @PickUpWeapon.canceled += instance.OnPickUpWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -286,6 +338,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Use.started -= instance.OnUse;
             @Use.performed -= instance.OnUse;
             @Use.canceled -= instance.OnUse;
+            @SwapWeapon.started -= instance.OnSwapWeapon;
+            @SwapWeapon.performed -= instance.OnSwapWeapon;
+            @SwapWeapon.canceled -= instance.OnSwapWeapon;
+            @PickUpWeapon.started -= instance.OnPickUpWeapon;
+            @PickUpWeapon.performed -= instance.OnPickUpWeapon;
+            @PickUpWeapon.canceled -= instance.OnPickUpWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -318,5 +376,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFire1(InputAction.CallbackContext context);
         void OnFire2(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnSwapWeapon(InputAction.CallbackContext context);
+        void OnPickUpWeapon(InputAction.CallbackContext context);
     }
 }

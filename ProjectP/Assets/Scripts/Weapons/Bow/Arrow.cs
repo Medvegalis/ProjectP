@@ -23,6 +23,10 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         //arrow movement
+        if (arrowRigidBody.bodyType == RigidbodyType2D.Static)
+        {
+            return;
+        }
         arrowRigidBody.velocity = (Vector2)transform.up * arrowSpeed;
     }
 
@@ -62,6 +66,7 @@ public class Arrow : MonoBehaviour
     private void TerrainHitResolve() 
     {
         arrowSpeed = 0;
+        arrowRigidBody.bodyType = RigidbodyType2D.Static;
         Destroy(gameObject, destroyTimer);
     }
 
