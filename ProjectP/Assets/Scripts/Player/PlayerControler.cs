@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControler : MonoBehaviour
+public class PlayerControler : MonoBehaviour, IDataPersistence
 {
     bool controlsEnabled;
     private PlayerControls playerControls;
-    private GameObject player;
-
     [SerializeField] private GameObject weapon;
 
     private Rigidbody2D playerRB;
@@ -19,7 +17,6 @@ public class PlayerControler : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
-        player = GetComponent<GameObject>();
         playerRB = GetComponent<Rigidbody2D>();
         controlsEnabled = true;
         moveSpeed = DefaultmoveSpeed;
@@ -47,6 +44,16 @@ public class PlayerControler : MonoBehaviour
         }
         Vector2 movementDirection = playerControls.Player.Move.ReadValue<Vector2>().normalized;
         MovePlayer(movementDirection);
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerPosition = this.transform.position;
     }
 
     private void MovePlayer(Vector2 directions)
