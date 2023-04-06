@@ -13,7 +13,7 @@ public class LootBag : MonoBehaviour
     /// adds it to the possibleLoot list. Then one item from the possibleLoot list is chosen by random.
     /// </summary>
     /// <returns></returns>
-    Loot GetDropppedItem()
+    List <Loot> GetDropppedItem()
     {
         int randomNum = Random.Range(1, 101); //1-100
         List<Loot> possibleLoot = new List<Loot>();
@@ -28,7 +28,11 @@ public class LootBag : MonoBehaviour
 
         if(possibleLoot.Count > 0)
         {
-            Loot dropppedItem = possibleLoot[Random.Range(0, possibleLoot.Count)];
+            List<Loot> dropppedItem = new List<Loot>();
+
+            for (int i = 0; i < Random.Range(0f, 2f); i++)
+                dropppedItem.Add( possibleLoot[Random.Range(0, possibleLoot.Count)]);
+
             return dropppedItem;
         }
         
@@ -41,12 +45,20 @@ public class LootBag : MonoBehaviour
     /// <param name="spanwPoint"></param>
     public void InstantiateLoot(Vector3 spanwPoint)
     {
-        Loot droppedItem = GetDropppedItem();
-        if(droppedItem != null)
+        List<Loot> droppedItems = GetDropppedItem();
+        float dropforce = 100f;
+        if (droppedItems != null)
         {
-            GameObject lootGameObject = Instantiate(droppedItemPrefab, spanwPoint, Quaternion.identity);
-            lootGameObject.name = droppedItem.lootName;
-            lootGameObject.GetComponent<SpriteRenderer>().sprite = droppedItem.lootSprite;
+            foreach(Loot loot in droppedItems)
+            {
+                GameObject lootGameObject = Instantiate(droppedItemPrefab, spanwPoint, Quaternion.identity);
+                lootGameObject.name = loot.lootName;
+                lootGameObject.GetComponent<SpriteRenderer>().sprite = loot.lootSprite;
+                lootGameObject.GetComponent<Collectable>().value = loot.value;
+
+                Vector2 dropDirection = new Vector2(Random.Range(-1f,1f), Random.Range(-1f, 1f));
+                lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDirection * dropforce, ForceMode2D.Impulse);
+            }
         }
     }
 }

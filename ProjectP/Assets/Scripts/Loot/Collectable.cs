@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-public class Coin : MonoBehaviour, ICollectable
+public class Collectable : MonoBehaviour, ICollectable
 {
     public static event Action<int> OnCollected; // An event for coin collection 
-    Rigidbody2D rb; // Aoin's rigid body
+    Rigidbody2D rb; // Coin's rigid body
     bool hasTarget = false; // If has a target to follow
     Vector3 targetPos; // The position of a target that need to be followed
+    public int value;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,7 +29,7 @@ public class Coin : MonoBehaviour, ICollectable
     /// Method destroys the collectable and invokes onCollected event
     /// </summary>
     /// <param name="value"> The value of the collectable </param>
-    public void Collect(int value)
+    public void Collect()
     {
         Destroy(gameObject);
         OnCollected.Invoke(value);

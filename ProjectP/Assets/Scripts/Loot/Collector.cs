@@ -13,20 +13,7 @@ public class Collector : MonoBehaviour
 
         if(collectable != null)
         {
-
-            switch(coll.transform.name)
-            {
-                case string name when name.Contains("Gem"):
-                    collectable.Collect(10);
-                break;
-
-                case string name when name.Contains("Coin"):
-                    collectable.Collect(1);
-                break;
-
-                default:
-                    break;
-            }
+           collectable.Collect();
         }
     }
 }

@@ -15,3 +15,4 @@ MonoBehaviour:
   lootSprite: {fileID: 21300000, guid: 1ef6cbe8483b7eb43b149804bae77580, type: 3}
   lootName: Gem
   dropChance: 50
+  value: 10

@@ -3,28 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 
 public class Health : MonoBehaviour
 {
-    public int health;
-    public int numOfHearts;
-
     [SerializeField] private UnityEvent Dead;
     [SerializeField] private float InvincibilityTime = 1f;
     [SerializeField] private bool IsBeingHit = false;
     [SerializeField] private bool isInvincible = false;
 
+
     private SpriteRenderer spriteRenderer;
 
+    [Header("Player Health")]
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+
+    public int health;
+    public int numOfHearts;
+
+    [Header("Player XP")]
+    [SerializeField] private int maxXP = 100;
+    [SerializeField] private int currentXP = 0;
+    [SerializeField] private int currentLvl = 0;
+
+    public Slider xpSlider;
+    public TextMeshProUGUI playerLevelUIText;
 
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
+        Collectable.OnCollected += IncreaseLevel;
     }
     void Update() {
 
@@ -48,6 +64,7 @@ public class Health : MonoBehaviour
         {
             DamagePlayer();
         }
+
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -63,6 +80,28 @@ public class Health : MonoBehaviour
         if(coll.transform.tag == "Enemy")
         {
             IsBeingHit = false;
+        }
+    }
+
+    private void IncreaseLevel(int value)
+    {
+        if(value == 0)
+        {
+            if (currentXP >= maxXP)
+            {
+                currentLvl++;
+                currentXP = 0;
+                maxXP = maxXP * 2;
+
+                xpSlider.maxValue = maxXP;
+                xpSlider.value = currentXP;
+                playerLevelUIText.text = currentLvl.ToString();
+            }
+            else
+            {
+                currentXP += 25;
+                xpSlider.value = currentXP;
+            }
         }
     }
 

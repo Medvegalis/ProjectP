@@ -15,7 +15,7 @@ public class CoinCounterUpdate : MonoBehaviour, IDataPersistence
     {
         coinCounter = GetComponent<TextMeshProUGUI>();
         coinCounter.text = currentCount.ToString();
-        Coin.OnCollected += AddToCounter;
+        Collectable.OnCollected += AddToCounter;
     }
     private void AddToCounter(int value)
     {
