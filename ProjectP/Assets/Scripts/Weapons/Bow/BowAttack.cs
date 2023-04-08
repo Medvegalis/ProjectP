@@ -7,6 +7,8 @@ public class BowAttack : MonoBehaviour, IHasAttack
     public GameObject ArrowPrefab;
     public Transform BowPoint;
 
+    public Stat playerDamageStat;
+
     [SerializeField]
     private int weaponDamage = 2;
     [SerializeField]
@@ -16,7 +18,7 @@ public class BowAttack : MonoBehaviour, IHasAttack
 
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -47,7 +49,7 @@ public class BowAttack : MonoBehaviour, IHasAttack
         );
 
         var arrowScript = arrow.GetComponent<Arrow>();
-        arrowScript.SetDamage(weaponDamage);
+        arrowScript.SetDamage(weaponDamage * playerDamageStat.currentValue);
         arrowScript.SetProjectileSpeed(weaponProjectileSpeed);
     }
 

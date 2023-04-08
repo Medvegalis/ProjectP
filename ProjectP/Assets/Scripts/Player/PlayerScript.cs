@@ -6,12 +6,18 @@ using UnityEngine.Events;
 using TMPro;
 
 
-public class Health : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
     [SerializeField] private UnityEvent Dead;
     [SerializeField] private float InvincibilityTime = 1f;
     [SerializeField] private bool IsBeingHit = false;
     [SerializeField] private bool isInvincible = false;
+
+    public Stat maxHealth;
+    public int currentHealth { get; private set; }
+
+    public Stat damage;
+    public Stat speed;
 
 
     private SpriteRenderer spriteRenderer;
@@ -21,9 +27,6 @@ public class Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
-    public int health;
-    public int numOfHearts;
-
     [Header("Player XP")]
     [SerializeField] private int maxXP = 100;
     [SerializeField] private int currentXP = 0;
@@ -32,10 +35,10 @@ public class Health : MonoBehaviour
     public Slider xpSlider;
     public TextMeshProUGUI playerLevelUIText;
 
-
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth.currentValue;
     }
 
     void Start()
@@ -44,17 +47,17 @@ public class Health : MonoBehaviour
     }
     void Update() {
 
-        if (health > numOfHearts)
-            health = numOfHearts;
+        if (currentHealth > maxHealth.currentValue)
+            currentHealth = maxHealth.currentValue;
 
         for (int i = 0; i < hearts.Length; i++) {
 
-            if (i < health)
+            if (i < currentHealth)
                 hearts[i].sprite = fullHeart;
             else
                 hearts[i].sprite = emptyHeart;
 
-            if (i < numOfHearts)
+            if (i < maxHealth.currentValue)
                 hearts[i].enabled = true;
             else
                 hearts[i].enabled = false;
@@ -85,7 +88,7 @@ public class Health : MonoBehaviour
 
     private void IncreaseLevel(int value)
     {
-        if(value == 0)
+        if(value < 0)
         {
             if (currentXP >= maxXP)
             {
@@ -99,7 +102,7 @@ public class Health : MonoBehaviour
             }
             else
             {
-                currentXP += 25;
+                currentXP += Mathf.Abs(value);
                 xpSlider.value = currentXP;
             }
         }
@@ -111,10 +114,10 @@ public class Health : MonoBehaviour
         if(isInvincible)
             return;
 
-        if(health > 0)
-            health -= 1;
+        if(currentHealth > 0)
+            currentHealth -= 1;
 
-        if(health <= 0)
+        if(currentHealth <= 0)
         {
             Dead.Invoke();
             return;

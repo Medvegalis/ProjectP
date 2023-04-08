@@ -30,8 +30,6 @@ public class EnemyAI : MonoBehaviour
         GFX = GetComponentInChildren<SpriteRenderer>();//NOT SAFE but will do for now sorry
 
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
-        
-        Debug.Log(GFX.name);
     }
 
     private void UpdatePath()

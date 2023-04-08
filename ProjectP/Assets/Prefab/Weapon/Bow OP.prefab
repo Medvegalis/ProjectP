@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrowPrefab: {fileID: 8637869219665854020, guid: 475eaebfd87bcab469bea46cfb02d846, type: 3}
   BowPoint: {fileID: 4409507712927908459}
+  playerDamageStat: {fileID: 11400000, guid: 86a6c2a9623be924c8b2e3afae523edd, type: 2}
   weaponDamage: 10
   weaponProjectileSpeed: 20
   canAttack: 0

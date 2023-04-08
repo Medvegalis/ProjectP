@@ -8,10 +8,11 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
 
     private Rigidbody2D playerRB;
 
+    public Stat speed;
+
     private float moveSpeed;
     [SerializeField] private float DefaultmoveSpeed = 5f;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -49,7 +50,7 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
 
     private void MovePlayer(Vector2 directions)
     {
-        playerRB.velocity = directions * moveSpeed;
+        playerRB.velocity = directions * speed.currentValue;
     }
 
     public void ReduceSpeed(float byAmount)

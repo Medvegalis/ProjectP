@@ -5,8 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu instance { get; private set; }
+
     public GameObject pauseMenu;
     public bool isPaused;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,10 +47,22 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
     }
-
     public void ResumeGame() 
     {
         pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+
+    public void PauseGameOther(GameObject menu)
+    {
+        menu.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+    public void ResumeGameOther(GameObject menu)
+    {
+        menu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }

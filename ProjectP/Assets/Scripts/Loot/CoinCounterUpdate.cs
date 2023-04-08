@@ -19,8 +19,11 @@ public class CoinCounterUpdate : MonoBehaviour, IDataPersistence
     }
     private void AddToCounter(int value)
     {
-        currentCount += value;
-        coinCounter.text = currentCount.ToString();
+        if(value > 0)
+        {
+            currentCount += value;
+            coinCounter.text = currentCount.ToString();
+        }
     }
 
     public void LoadData(GameData data)
