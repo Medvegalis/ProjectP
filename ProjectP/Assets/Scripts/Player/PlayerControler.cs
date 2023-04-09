@@ -10,6 +10,10 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
 
     public Stat speed;
 
+    private Vector2 movement;
+
+    public Animator animator;
+
     private float moveSpeed;
     [SerializeField] private float DefaultmoveSpeed = 5f;
 
@@ -36,6 +40,13 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
     {
         Vector2 movementDirection = playerControls.Player.Move.ReadValue<Vector2>().normalized;
         MovePlayer(movementDirection);
+        
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     public void LoadData(GameData data)
