@@ -1,13 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ModularWeaponCore : MonoBehaviour
 {
+    [Header("Weapon slots")]
+    public Image[] slots;
+    public Image[] slotBorders;
+    public Sprite selectedSlotBorderSprite;
+    public Sprite slotBorderSprite;
+
+
     private PlayerControls playerControls;
+
+    [Header("Variables for weapons")]
     public Transform WeaponPos;
     [SerializeField]
     GameObject startingWeapon;
+
+
+    [Header("Swapping")]
     [SerializeField]
     float swapCooldown = 2f;
     [SerializeField]
@@ -18,18 +32,20 @@ public class ModularWeaponCore : MonoBehaviour
 
     //weapon array
     [SerializeField]
-    int weaponSlotCount = 3;
-    [SerializeField]
-    GameObject[] weapons = new GameObject[3];
+    GameObject[] weapons;
+
+    public int maxWeaponCount;
 
     public int currentWeaponIndex;
     public int currentWeaponCount;
 
+    [Header("Pickup variables")]
     public bool standingOnWeapon;
     public GameObject weaponOnGround;
 
     void Start()
     {
+        maxWeaponCount = weapons.Length;
         //weapon swap logic
         canSwap = true;
         swapOnCooldown = false;
@@ -40,15 +56,54 @@ public class ModularWeaponCore : MonoBehaviour
         //pick up logic
         standingOnWeapon = false;
         currentWeaponCount = 1;
+        //slotBorderSprite instantiation
+        updateslotBorderSpriteVisuals();
     }
 
 
     void Update()
     {
         WeaponRotateToLookAtMouse();
+
         SwapWeapon();
+
         pickUpWeapon();
+
+        updateslotBorderSpriteVisuals();
     }
+
+    //waepon slot sprite update logic
+    private void updateslotBorderSpriteVisuals() {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            var currentSlot = slots[i];
+            //adding the weapon sprite to the slotBorderSprite
+            if (weapons[i] != null)
+            {
+                GameObject weapon = weapons[i];
+                Sprite weaponSprite = weapon.GetComponent<SpriteRenderer>().sprite;
+
+
+                currentSlot.sprite = weaponSprite;
+                currentSlot.enabled = true;
+            }
+            else
+            {
+                currentSlot.enabled = false;
+            }
+
+            //updating selected slot highlight
+            if (i == currentWeaponIndex)
+            {
+                slotBorders[i].sprite = selectedSlotBorderSprite;
+            }
+            else
+            {
+                slotBorders[i].sprite = slotBorderSprite;
+            }
+        }
+    }
+
     // Aim at mouse logic
     private void WeaponRotateToLookAtMouse()
     {
@@ -143,7 +198,7 @@ public class ModularWeaponCore : MonoBehaviour
             return;
         }
 
-        if (currentWeaponCount >= weaponSlotCount)
+        if (currentWeaponCount >= maxWeaponCount)
         {
             replaceExistingWeapon();
             return;
