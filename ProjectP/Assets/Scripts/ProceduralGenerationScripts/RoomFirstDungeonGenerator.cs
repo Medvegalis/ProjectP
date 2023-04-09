@@ -6,6 +6,12 @@ using Random = UnityEngine.Random;
 
 public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
+    [SerializeField] public GameObject player;
+    [SerializeField] public GameObject enemy;
+
+    private GameObject enemyInstance;
+    private EnemyAI enemyAI;
+
     [SerializeField]
    private int minRoomWidth = 5;
     [SerializeField]
@@ -22,6 +28,9 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
    protected override void RunProceduralGeneration() 
    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies )
+            DestroyImmediate(enemy);
         CreateRooms();
    }
 
@@ -42,6 +51,16 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         foreach(var room in roomsList)
         {
             roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+        }
+
+        player.transform.position = new Vector3(roomCenters[0].x, roomCenters[0].y, 1.0f);
+
+        for(int i = 1; i < roomCenters.Count; i++) 
+        {
+            enemyInstance = Instantiate(enemy, new Vector3(roomCenters[i].x,roomCenters[i].y, 1.0f), Quaternion.identity);
+            enemyAI = enemyInstance.GetComponent<EnemyAI>();
+            enemyAI.target = player.transform;
+            enemyInstance.tag = "Enemy";
         }
 
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
