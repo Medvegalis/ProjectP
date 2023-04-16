@@ -98,8 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7038f164f29bf2f4599e98ab6ef10480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chainTimer: 3
-  isInChainTimer: 0
+  player: {fileID: 0}
+  swordAttacks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damage: 10
+  knockback: 5
   canAttack: 0
 --- !u!61 &6375199039113219122
 BoxCollider2D:
