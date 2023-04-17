@@ -107,10 +107,10 @@ public class UpgradeTable : MonoBehaviour, IDataPersistence
         }
     }
 
-    private void PointColleted(int value)
+    private void PointColleted(typeOfLoot type,int value)
     {
-        if(value == 0)
-            pointsCount++;
+        if(type == typeOfLoot.statCoin)
+            pointsCount+=value;
     }
 
     public void LoadData(GameData data)

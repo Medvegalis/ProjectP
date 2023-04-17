@@ -22,10 +22,11 @@ public class AttackHit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.transform.tag + " hit " + collision.transform.gameObject.name);
-        if (collision.transform.tag == "Enemy")
-        {
-            DamageEnemy(collision);
-        }
+        if(!collision.isTrigger)
+            if (collision.transform.tag == "Enemy")
+            {
+                DamageEnemy(collision);
+            }
     }
 
 

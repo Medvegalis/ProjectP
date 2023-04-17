@@ -17,6 +17,10 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
     private float moveSpeed;
     [SerializeField] private float DefaultmoveSpeed = 5f;
 
+    bool isBeingSlowed = false;
+
+    private float slowAmount;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -61,17 +65,22 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
 
     private void MovePlayer(Vector2 directions)
     {
-        playerRB.velocity = directions * speed.currentValue;
+        if(!isBeingSlowed)
+            playerRB.velocity = directions * speed.currentValue;
+        else
+            playerRB.velocity = directions * (speed.currentValue / slowAmount);
     }
 
     public void ReduceSpeed(float byAmount)
     {
-        moveSpeed = DefaultmoveSpeed / byAmount;
+        isBeingSlowed = true;
+        slowAmount = byAmount;
     }
 
     public void ReduceSpeed()
     {
-        moveSpeed = DefaultmoveSpeed;
+        isBeingSlowed = false;
+        slowAmount = 1;
     }
 
 }

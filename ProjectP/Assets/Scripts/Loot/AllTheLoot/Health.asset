@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90e3b0d18a6e99745a961dec391151cf, type: 3}
-  m_Name: Damage
+  m_Script: {fileID: 11500000, guid: fa3924512cc283241ada7743a05f8d13, type: 3}
+  m_Name: Health
   m_EditorClassIdentifier: 
-  baseValue: 2
-  currentValue: 1
-  currentLevel: 1
-  maxLevel: 3
-  statValues: 03000000050000000a000000
+  lootType: 1
+  lootSprite: {fileID: 21300000, guid: 0304a52024e6cee4691b4766d8c9c052, type: 3}
+  lootName: Health
+  dropChance: 100
+  value: 1

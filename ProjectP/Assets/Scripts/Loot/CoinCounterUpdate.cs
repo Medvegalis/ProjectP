@@ -17,9 +17,9 @@ public class CoinCounterUpdate : MonoBehaviour, IDataPersistence
         coinCounter.text = currentCount.ToString();
         Collectable.OnCollected += AddToCounter;
     }
-    private void AddToCounter(int value)
+    private void AddToCounter(typeOfLoot type, int value)
     {
-        if(value > 0)
+        if(type == typeOfLoot.coin)
         {
             currentCount += value;
             coinCounter.text = currentCount.ToString();

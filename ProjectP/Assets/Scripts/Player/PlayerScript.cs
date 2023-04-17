@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
-
+using System;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -44,6 +44,8 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         Collectable.OnCollected += IncreaseLevel;
+        Collectable.OnCollected += Heal;
+
     }
     void Update() {
 
@@ -86,9 +88,9 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private void IncreaseLevel(int value)
+    private void IncreaseLevel(typeOfLoot type, int value)
     {
-        if(value < 0)
+        if(type == typeOfLoot.xp)
         {
             if (currentXP >= maxXP)
             {
@@ -102,9 +104,20 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                currentXP += Mathf.Abs(value);
+                currentXP += value;
                 xpSlider.value = currentXP;
             }
+        }
+    }
+
+    private void Heal(typeOfLoot type, int value)
+    {
+        if (type == typeOfLoot.health)
+        {
+            int temp = currentHealth + value;
+
+            if (temp <= maxHealth.maxLevel)
+                currentHealth += value;
         }
     }
 

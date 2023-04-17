@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+    public enum typeOfLoot
+    {
+        coin,
+        health,
+        statCoin,
+        xp
+    }
 /// <summary>
 /// Loot Object
 /// </summary>
 [CreateAssetMenu]
 public class Loot : ScriptableObject
 {
+
+    public typeOfLoot lootType;
     public Sprite lootSprite;
     public string lootName;
     public int dropChance;

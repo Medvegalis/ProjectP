@@ -55,6 +55,7 @@ public class LootBag : MonoBehaviour
                 lootGameObject.name = loot.lootName;
                 lootGameObject.GetComponent<SpriteRenderer>().sprite = loot.lootSprite;
                 lootGameObject.GetComponent<Collectable>().value = loot.value;
+                lootGameObject.GetComponent<Collectable>().lootType = loot.lootType;
 
                 Vector2 dropDirection = new Vector2(Random.Range(-1f,1f), Random.Range(-1f, 1f));
                 lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDirection * dropforce, ForceMode2D.Impulse);
