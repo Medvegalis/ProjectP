@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709901185154884374}
-  m_LocalRotation: {x: -0, y: -0, z: 0.009965552, w: 0.99995035}
+  m_LocalRotation: {x: 0, y: 0, z: 0.0099656535, w: 0.9999504}
   m_LocalPosition: {x: -0.293, y: 0.0059816837, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -102,6 +102,10 @@ MonoBehaviour:
   BowPoint: {fileID: 1709901185398253649}
   playerDamageStat: {fileID: 11400000, guid: 86a6c2a9623be924c8b2e3afae523edd, type: 2}
   weaponDamage: 4
+  baseWeaponProjectileSpeed: 10
+  baseProjectileCount: 1
+  multipleProjectileAngleIncrement: 5
+  projectileCount: 0
   weaponProjectileSpeed: 15
   canAttack: 0
 --- !u!1 &1709901185398253662
@@ -128,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709901185398253662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.533, y: 0.057, z: 0}
+  m_LocalPosition: {x: 0.37, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -30,18 +30,19 @@ public class Arrow : MonoBehaviour
         arrowRigidBody.velocity = (Vector2)transform.up * arrowSpeed;
     }
 
-    //Happens when the arrow collides with other rigidbody
-    void OnCollisionEnter2D(Collision2D other)
+	private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (other.transform.tag) 
+        if (collision.isTrigger)
+        {
+            return;
+        }
+
+        switch (collision.transform.tag)
         {
             //if the other rigid body has enemy tag try to deal damage
-            case "Enemy": DamageEnemy(other); break;
+            case "Enemy": DamageEnemy(collision); break;
             // if it hit terrain make it linger for a bit and destroy it
             case "Terrain": TerrainHitResolve(); break;
-            //If projectile hits other projectile destroy it
-            //(possible future fixes/implimentations for other interact option)
-            case "Projectile": Destroy(gameObject, 0.1f); break;
             default: break;
         }
     }
@@ -53,6 +54,20 @@ public class Arrow : MonoBehaviour
 
         //get the enemy health script to be able to damage it
         var healthScript = enemy.collider.GetComponent<EnemyHealth>();
+        //check if the collided entity tagged as enemy has enemy health script
+        if (healthScript != null)
+        {
+            healthScript.DamageEnemy(damage);
+        }
+    }
+
+    private void DamageEnemy(Collider2D enemy)
+    {
+        //immediately destroy the arrow
+        Destroy(gameObject);
+
+        //get the enemy health script to be able to damage it
+        var healthScript = enemy.GetComponent<EnemyHealth>();
         //check if the collided entity tagged as enemy has enemy health script
         if (healthScript != null)
         {

@@ -2276,7 +2276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -191.00937, y: -12.999924}
+  m_AnchoredPosition: {x: -191.00934, y: -12.999939}
   m_SizeDelta: {x: -476.0189, y: -372.7181}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &205027722
@@ -3849,7 +3849,7 @@ RectTransform:
   m_GameObject: {fileID: 534309547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 205027723}
@@ -3859,8 +3859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -342.4, y: -54.8}
-  m_SizeDelta: {x: 100, y: 31.4119}
+  m_AnchoredPosition: {x: -243, y: -173.44}
+  m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &538230785 stripped
 Transform:
@@ -17676,10 +17676,6 @@ PrefabInstance:
       propertyPath: xpSlider
       value: 
       objectReference: {fileID: 743050800}
-    - target: {fileID: 900584204229913432, guid: 23b103312fa515546a057dfbf0c71094, type: 3}
-      propertyPath: isInvincible
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 900584204229913432, guid: 23b103312fa515546a057dfbf0c71094, type: 3}
       propertyPath: playerLevelUIText
       value: 

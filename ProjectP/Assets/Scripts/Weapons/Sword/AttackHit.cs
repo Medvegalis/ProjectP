@@ -21,12 +21,16 @@ public class AttackHit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.transform.tag + " hit " + collision.transform.gameObject.name);
-        if(!collision.isTrigger)
-            if (collision.transform.tag == "Enemy")
-            {
-                DamageEnemy(collision);
-            }
+        //Debug.Log(collision.transform.tag + " hit " + collision.transform.gameObject.name);
+        if (collision.isTrigger)
+        {
+            return;
+        }
+
+        if (collision.transform.tag == "Enemy")
+        {
+            DamageEnemy(collision);
+        }
     }
 
 
