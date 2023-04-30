@@ -13,6 +13,8 @@ public class RangedEnemyAI : MonoBehaviour
     [SerializeField] private float distanceToStop = 10f;
     [SerializeField] public GameObject bullet;
 
+    [SerializeField] public Animator animator;
+
     public SpriteRenderer GFX;
 
     private Path path;
@@ -46,11 +48,13 @@ public class RangedEnemyAI : MonoBehaviour
     {
         Shoot();
 
-
         if (isInRange)
         {
             Vector2 direction = (target.position - transform.position).normalized;
             rb.velocity = new Vector2(-direction.x, -direction.y) * speed/2;
+            animator.SetFloat("Horizontal", direction.x);
+            animator.SetFloat("Vertical", direction.y);
+            animator.SetFloat("Speed", direction.normalized.magnitude);
             Console.WriteLine("Runing away");
 
         }
