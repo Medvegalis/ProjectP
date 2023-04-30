@@ -8,6 +8,7 @@ TagManager:
   - Terrain
   - Projectile
   - Weapon
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - Player
   - Obsticle
   - Collectibles
-  - 
-  - 
+  - EnemyProjectile
+  - Enemy
   - 
   - 
   - 

@@ -20,6 +20,8 @@ public class Ability : ScriptableObject
     private int maxLevel;
     [SerializeField]
     private float valuePerLevel;
+    [SerializeField]
+    public int rarity;
 
     public Ability() 
     {

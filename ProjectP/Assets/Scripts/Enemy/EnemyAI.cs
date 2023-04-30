@@ -12,11 +12,13 @@ public class EnemyAI : MonoBehaviour
 
     private SpriteRenderer GFX;
 
+
     private Path path;
     private int currentWaypoint = 0;
     private bool reachedEndOfPath = false;
 
     private bool hasEnteredRanged = false;
+
 
     private Seeker seeker;
     private Rigidbody2D rb;
@@ -42,6 +44,9 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+
+
+
     private void OnPathComplete(Path p)
     {
         if(!p.error)
@@ -56,9 +61,9 @@ public class EnemyAI : MonoBehaviour
         if(coll.transform.tag == "Player")
         {
             hasEnteredRanged = true;
+
         }
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {

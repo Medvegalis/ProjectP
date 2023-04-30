@@ -10,14 +10,12 @@ public class EnemyHealth : MonoBehaviour
     private float timeSinceHurt;
     public int health;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
+        //spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
         gotHurt = false;
-
-        Debug.Log(spriteRenderer.name);
     }
 
     void Update()
@@ -29,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
         }
         if (timeSinceHurt + hurtSpriteColorChangeTime <= Time.time)
         {
-            spriteRenderer.color = Color.white;
+           spriteRenderer.color = Color.white;
         }
     }
 

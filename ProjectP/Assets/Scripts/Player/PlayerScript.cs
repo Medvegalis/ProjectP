@@ -9,9 +9,12 @@ using System;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField] private UnityEvent Dead;
+    [SerializeField] private UnityEvent LevelUp;
     [SerializeField] private float InvincibilityTime = 1f;
     [SerializeField] private bool IsBeingHit = false;
     [SerializeField] private bool isInvincible = false;
+
+    private int damageToTake; // damage that will be delt to player from onDamagePlayer event
 
     public Stat maxHealth;
     public int currentHealth { get; private set; }
@@ -45,6 +48,7 @@ public class PlayerScript : MonoBehaviour
     {
         Collectable.OnCollected += IncreaseLevel;
         Collectable.OnCollected += Heal;
+        EnemyProjectileScript.onHit += DamagePlayer;
 
     }
     void Update() {
@@ -67,7 +71,7 @@ public class PlayerScript : MonoBehaviour
 
         if(IsBeingHit)
         {
-            DamagePlayer();
+            DamagePlayer(1);
         }
 
     }
@@ -101,6 +105,7 @@ public class PlayerScript : MonoBehaviour
                 xpSlider.maxValue = maxXP;
                 xpSlider.value = currentXP;
                 playerLevelUIText.text = currentLvl.ToString();
+                LevelUp.Invoke();
             }
             else
             {
@@ -122,13 +127,16 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-    public void DamagePlayer()
+    public void DamagePlayer(int amount)
     {
+        if (amount == 0)
+            return;
+
         if(isInvincible)
             return;
 
         if(currentHealth > 0)
-            currentHealth -= 1;
+            currentHealth -= amount;
 
         if(currentHealth <= 0)
         {

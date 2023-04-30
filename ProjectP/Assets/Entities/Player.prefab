@@ -278,7 +278,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900584204229913441}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -431,9 +431,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  levelUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: SetTimeScaleToZero
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   InvincibilityTime: 1
   IsBeingHit: 0
-  isInvincible: 0
+  isInvincible: 1
   maxHealth: {fileID: 11400000, guid: d8cf4cebece5fc84690c76d0c48fe617, type: 2}
   damage: {fileID: 11400000, guid: 86a6c2a9623be924c8b2e3afae523edd, type: 2}
   speed: {fileID: 11400000, guid: dc76f2031128eaf47853cd9604b06810, type: 2}
@@ -479,9 +506,11 @@ MonoBehaviour:
   abilities:
   - {fileID: 11400000, guid: dd965743e08ca9a4b8061e723f9aa6ea, type: 2}
   - {fileID: 11400000, guid: 1d26b46c3ed08304aaa4453303270df0, type: 2}
+  abiltyCount: 0
   enabledAbilities:
   - {fileID: 0}
   - {fileID: 0}
+  enabledAbilityCount: 0
 --- !u!114 &900584204229913428
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,3 +18,4 @@ MonoBehaviour:
   currentLevel: 1
   maxLevel: 3
   valuePerLevel: 10
+  rarity: 100
