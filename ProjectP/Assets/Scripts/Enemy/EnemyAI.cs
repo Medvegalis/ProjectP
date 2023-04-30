@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.EventSystems;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] public Transform target;
     [SerializeField] private float speed = 200f;
     [SerializeField] private float nextWaypointDistace = 3f;
+
+    public Animator animator;
 
     private SpriteRenderer GFX;
 
@@ -67,6 +70,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if(path == null)
             return;
 
@@ -84,7 +88,10 @@ public class EnemyAI : MonoBehaviour
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed;
+
+        animator.SetFloat("Horizontal", direction.x);
+        animator.SetFloat("Vertical", direction.y);
+        animator.SetFloat("Speed", direction.normalized.magnitude);
 
         rb.velocity = new Vector2(direction.x, direction.y) * speed;
 
