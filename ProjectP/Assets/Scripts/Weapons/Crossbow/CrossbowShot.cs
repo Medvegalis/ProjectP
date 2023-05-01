@@ -2,35 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class CrossbowShot : MonoBehaviour
 {
     [SerializeField]
-    private float arrowSpeed = 5f;
+    private float shotSpeed = 5f;
     [SerializeField]
-    private float destroyTimer = 2f;
+    private float destroyTimer = .1f;
     [SerializeField]
-    private int damage = 1;
+    private int damage = 10;
 
-    private Rigidbody2D arrowRigidBody;
-    private AudioSource audioSource;
+    private Rigidbody2D shotRigidBody;
 
+    // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        arrowRigidBody = GetComponent<Rigidbody2D>();
+        shotRigidBody = GetComponent<Rigidbody2D>();
     }
 
+    // Update is called once per frame
     void Update()
     {
-        //arrow movement
-        if (arrowRigidBody.bodyType == RigidbodyType2D.Static)
+        if (shotRigidBody.bodyType == RigidbodyType2D.Static)
         {
             return;
         }
-        arrowRigidBody.velocity = (Vector2)transform.up * arrowSpeed;
+        shotRigidBody.velocity = (Vector2)transform.up * shotSpeed;
     }
-
-	private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.isTrigger)
         {
@@ -49,9 +47,6 @@ public class Arrow : MonoBehaviour
 
     private void DamageEnemy(Collider2D enemy)
     {
-        //immediately destroy the arrow
-        Destroy(gameObject);
-
         //get the enemy health script to be able to damage it
         var healthScript = enemy.GetComponent<EnemyHealth>();
         //check if the collided entity tagged as enemy has enemy health script
@@ -64,11 +59,10 @@ public class Arrow : MonoBehaviour
     /// <summary>
     /// resolve the terrain hit logic
     /// </summary>
-    private void TerrainHitResolve() 
+    private void TerrainHitResolve()
     {
-        audioSource.Play();
-        arrowSpeed = 0;
-        arrowRigidBody.bodyType = RigidbodyType2D.Static;
+        shotSpeed = 0;
+        shotRigidBody.bodyType = RigidbodyType2D.Static;
         Destroy(gameObject, destroyTimer);
     }
 
@@ -87,6 +81,6 @@ public class Arrow : MonoBehaviour
     /// <param name="speed"></param>
     public void SetProjectileSpeed(float speed)
     {
-        arrowSpeed = speed;
+        shotSpeed = speed;
     }
 }

@@ -10,6 +10,7 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
     public Stat playerDamageStat;
 
     private AbilityControler abilityScript;
+    private AudioSource audioSource;
 
     [Header("Weapon values")]
     [SerializeField]
@@ -19,6 +20,8 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
     [SerializeField]
     private int baseProjectileCount = 1;
     [SerializeField]
+    private float attackCooldown = .2f;
+    [SerializeField]
     private float multipleProjectileAngleIncrement = 15f;
     [Header("Debug lookup for current values")]
     [SerializeField]
@@ -27,9 +30,11 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
     private float weaponProjectileSpeed;
 
     public bool canAttack;
+    public bool attackOnCooldown;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         projectileCount = baseProjectileCount;
         weaponProjectileSpeed = baseWeaponProjectileSpeed;
         getPlayerAbilityScript();
@@ -58,13 +63,28 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
         {
             return;
         }
+        if (attackOnCooldown)
+        {
+            return;
+        }
 
+        audioSource.Play();
 		for (int i = 1; i <= projectileCount; i++)
 		{
             float angleIndexAlternating = -(i%2)*(i/2) + ((1-(i%2))*(i/2));
             float angle = Mathf.LerpUnclamped(0f, multipleProjectileAngleIncrement, angleIndexAlternating);
             ShootArrow(angle);
 		}
+
+        StartCoroutine(PerformCooldownPeriod());
+    }
+    private IEnumerator PerformCooldownPeriod()
+    {
+        attackOnCooldown = true;
+        yield return new WaitForSeconds(attackCooldown);
+
+        yield return new WaitForSeconds(0.1f);
+        attackOnCooldown = false;
     }
 
     private void ShootArrow(float angleOffset) {
