@@ -5,17 +5,21 @@ using UnityEngine;
 public class PlayerControler : MonoBehaviour, IDataPersistence
 {
     public PlayerControls playerControls;
+    public PlayerScript playerScript;
 
     private Rigidbody2D playerRB;
 
     public Stat speed;
 
-    private Vector2 movement;
-
     public Animator animator;
 
-    private float moveSpeed;
     [SerializeField] private float DefaultmoveSpeed = 5f;
+
+    private bool canDash = true;
+    private bool isDashing = false;
+    private float dashingPower = 22f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
 
     bool isBeingSlowed = false;
 
@@ -25,8 +29,6 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
     {
         playerControls = new PlayerControls();
         playerRB = GetComponent<Rigidbody2D>();
-        moveSpeed = DefaultmoveSpeed;
-
         Physics2D.IgnoreLayerCollision(6,7);
     }
 
@@ -44,13 +46,16 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
     {
         Vector2 movementDirection = playerControls.Player.Move.ReadValue<Vector2>().normalized;
         MovePlayer(movementDirection);
-        
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        if(playerControls.Player.Dash.WasPerformedThisFrame() && canDash)
+            StartCoroutine(Dash(movementDirection));
+
+        movementDirection.x = Input.GetAxisRaw("Horizontal");
+        movementDirection.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", movementDirection.x);
+        animator.SetFloat("Vertical", movementDirection.y);
+        animator.SetFloat("Speed", movementDirection.sqrMagnitude);
     }
 
     public void LoadData(GameData data)
@@ -65,10 +70,31 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
 
     private void MovePlayer(Vector2 directions)
     {
-        if(!isBeingSlowed)
-            playerRB.velocity = directions * speed.currentValue;
-        else
-            playerRB.velocity = directions * (speed.currentValue / slowAmount);
+        if (!isDashing)
+        {
+            if (!isBeingSlowed)
+                playerRB.velocity = directions * speed.currentValue;
+            else
+                playerRB.velocity = directions * (speed.currentValue / slowAmount);
+        }
+    }
+
+
+    private IEnumerator Dash(Vector2 directions)
+    {
+        canDash = false;
+        isDashing = true;
+        playerRB.velocity = directions * dashingPower;
+        //Makes the player invincible for dash duration
+        playerScript.BecomeInvicible(dashingTime*2);
+        //Turns off collision between player(7) and enemy(11) layers
+        Physics2D.IgnoreLayerCollision(7, 11, true);
+        yield return new WaitForSeconds(dashingTime);
+        Physics2D.IgnoreLayerCollision(7, 11, false);
+
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 
     public void ReduceSpeed(float byAmount)

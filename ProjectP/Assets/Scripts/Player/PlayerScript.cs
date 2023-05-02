@@ -159,4 +159,16 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isInvincible = false;
     }
+
+    public void BecomeInvicible(float duration)
+    {
+        StartCoroutine(SetInvicibleForDuration(duration));
+    }
+
+    public IEnumerator SetInvicibleForDuration(float duration)
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(duration);
+        isInvincible = false;
+    }
 }

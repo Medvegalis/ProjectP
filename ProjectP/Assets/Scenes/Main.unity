@@ -4248,7 +4248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 570419762}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5656,6 +5656,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCustom
       objectReference: {fileID: 0}
+    - target: {fileID: 3126766404703524569, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3126766404703524571, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
       propertyPath: target
       value: 
@@ -5676,6 +5680,10 @@ PrefabInstance:
       propertyPath: lootList.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: a5b94348707177e46bcbc0f915d0ff49, type: 2}
+    - target: {fileID: 3126766405034536694, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3126766405034536696, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6355,6 +6363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCustom
       objectReference: {fileID: 0}
+    - target: {fileID: 3126766404703524569, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3126766404703524571, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
       propertyPath: target
       value: 
@@ -6375,6 +6387,10 @@ PrefabInstance:
       propertyPath: lootList.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: a5b94348707177e46bcbc0f915d0ff49, type: 2}
+    - target: {fileID: 3126766405034536694, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3126766405034536696, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -19684,6 +19700,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 743050800}
     - target: {fileID: 900584204229913432, guid: 23b103312fa515546a057dfbf0c71094, type: 3}
+      propertyPath: isInvincible
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900584204229913432, guid: 23b103312fa515546a057dfbf0c71094, type: 3}
       propertyPath: playerLevelUIText
       value: 
       objectReference: {fileID: 2111642641}
@@ -19775,6 +19795,10 @@ PrefabInstance:
       propertyPath: LevelUp.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 900584204229913433, guid: 23b103312fa515546a057dfbf0c71094, type: 3}
+      propertyPath: playerScript
+      value: 
+      objectReference: {fileID: 1034630758}
     - target: {fileID: 900584204229913439, guid: 23b103312fa515546a057dfbf0c71094, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -19973,6 +19997,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCustom
       objectReference: {fileID: 0}
+    - target: {fileID: 3126766404703524569, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3126766404703524571, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
       propertyPath: target
       value: 
@@ -19993,6 +20021,10 @@ PrefabInstance:
       propertyPath: lootList.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: a5b94348707177e46bcbc0f915d0ff49, type: 2}
+    - target: {fileID: 3126766405034536694, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3126766405034536696, guid: f40491b85a742db4fa7479caf402cd16, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -20014,6 +20046,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1734624043}
     m_Modifications:
+    - target: {fileID: 4190912168022383659, guid: f4fcf03be54424140a9db00578f07a58, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4190912168022383661, guid: f4fcf03be54424140a9db00578f07a58, type: 3}
       propertyPath: target
       value: 
@@ -20025,6 +20061,10 @@ PrefabInstance:
     - target: {fileID: 4190912168764940723, guid: f4fcf03be54424140a9db00578f07a58, type: 3}
       propertyPath: m_Name
       value: EnemyRanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190912168764940723, guid: f4fcf03be54424140a9db00578f07a58, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4190912168764940724, guid: f4fcf03be54424140a9db00578f07a58, type: 3}
       propertyPath: m_RootOrder
@@ -20074,5 +20114,9 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -553034979, guid: 7ebcfb71dc5876e46a66017f0f420522, type: 3}
+    - target: {fileID: 4190912169394231567, guid: f4fcf03be54424140a9db00578f07a58, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4fcf03be54424140a9db00578f07a58, type: 3}

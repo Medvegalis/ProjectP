@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e3b0d18a6e99745a961dec391151cf, type: 3}
   m_Name: Health
   m_EditorClassIdentifier: 
-  baseValue: 1
-  currentValue: 1
+  baseValue: 2
+  currentValue: 2
   currentLevel: 0
   maxLevel: 3
-  increaseStep: 1
   statValues: 020000000300000004000000
