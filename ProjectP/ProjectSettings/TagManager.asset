@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Weapon
   - EnemyProjectile
+  - Light
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Collectibles
   - EnemyProjectile
   - Enemy
-  - 
+  - Light
   - 
   - 
   - 

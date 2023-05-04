@@ -64,6 +64,10 @@ public class PrefabPlacer : MonoBehaviour
         GameObject newItem = CreateObject(itemPrefab,placementPosition);
         //GameObject newItem = Instantiate(itemPrefab, placementPosition, Quaternion.identity);
         newItem.GetComponent<Item>().Initialize(item);
+        if(item.health == -1)
+        {
+            newItem.tag = "Light";
+        }
         return newItem;
     }
 

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 public class Item : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class Item : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField]
     private BoxCollider2D itemCollider;
-
     [SerializeField]
     int health = 3;
     [SerializeField]
@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
 
     public void Initialize(ItemData itemData)
     {
+
         //set sprite
         spriteRenderer.sprite = itemData.sprite;
         //set sprite offset

@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabPlacer: {fileID: 4341242197028722173, guid: 49d1de73f44f58940a43bf538b290285, type: 3}
   enemyPlacementData:
-  - minQuantity: 2
-    maxQuantity: 4
+  - minQuantity: 5
+    maxQuantity: 8
     enemyPrefab: {fileID: 6577542220980008845, guid: 7f9736c01ffb56d4ea25dbd850573006, type: 3}
     enemySize: {x: 1, y: 1}
   - minQuantity: 0
