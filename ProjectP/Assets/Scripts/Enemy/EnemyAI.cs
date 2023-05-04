@@ -43,8 +43,6 @@ public class EnemyAI : MonoBehaviour
             if(hasEnteredRanged)
                 seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
-
-
     }
 
 

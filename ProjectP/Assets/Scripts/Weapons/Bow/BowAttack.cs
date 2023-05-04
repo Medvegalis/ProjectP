@@ -37,7 +37,7 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
         audioSource = GetComponent<AudioSource>();
         projectileCount = baseProjectileCount;
         weaponProjectileSpeed = baseWeaponProjectileSpeed;
-        getPlayerAbilityScript();
+        //getPlayerAbilityScript();
     }
 
     void Update()
