@@ -9,7 +9,7 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
     public Transform BowPoint;
     public Stat playerDamageStat;
 
-    private AbilityControler abilityScript;
+    public AbilityControler abilityScript;
     private AudioSource audioSource;
 
     [Header("Weapon values")]
@@ -122,7 +122,7 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
     private void getPlayerAbilityScript() 
     {
         GameObject player = GameObject.Find("Player");
-        abilityScript = player.GetComponent<AbilityControler>();
+       // abilityScript = player.GetComponent<AbilityControler>();
     }
 
     public void setProjectileAmount(int count)

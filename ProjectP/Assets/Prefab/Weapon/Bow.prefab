@@ -102,13 +102,16 @@ MonoBehaviour:
   ArrowPrefab: {fileID: 8637869219665854020, guid: 475eaebfd87bcab469bea46cfb02d846, type: 3}
   BowPoint: {fileID: 1709901185398253649}
   playerDamageStat: {fileID: 11400000, guid: 86a6c2a9623be924c8b2e3afae523edd, type: 2}
+  abilityScript: {fileID: 2370936475062271703, guid: 23b103312fa515546a057dfbf0c71094, type: 3}
   weaponDamage: 4
   baseWeaponProjectileSpeed: 10
   baseProjectileCount: 1
+  attackCooldown: 0.2
   multipleProjectileAngleIncrement: 5
   projectileCount: 0
   weaponProjectileSpeed: 15
   canAttack: 0
+  attackOnCooldown: 0
 --- !u!82 &1745397607360724247
 AudioSource:
   m_ObjectHideFlags: 0

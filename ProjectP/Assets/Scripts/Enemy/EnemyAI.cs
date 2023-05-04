@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using UnityEngine.EventSystems;
+using System;
 
 public class EnemyAI : MonoBehaviour
 {
 
-    [SerializeField] public Transform target;
+    private Transform target;
+    public Vector2 TPos;
     [SerializeField] private float speed = 200f;
     [SerializeField] private float nextWaypointDistace = 3f;
 
@@ -26,13 +28,18 @@ public class EnemyAI : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
 
+    private void Update()
+    {
+        TPos = target.position;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         GFX = GetComponentInChildren<SpriteRenderer>();//NOT SAFE but will do for now sorry
-
+        target = GameObject.FindWithTag("Player").GetComponent<Transform>();
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
     }
 

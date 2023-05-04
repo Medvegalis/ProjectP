@@ -7,7 +7,7 @@ using UnityEngine;
 public class RangedEnemyAI : MonoBehaviour
 {
 
-    [SerializeField] public Transform target;
+    private Transform target;
     [SerializeField] private float speed = 4f;
     [SerializeField] private float nextWaypointDistace = 0.5f;
     [SerializeField] private float distanceToStop = 10f;
@@ -38,6 +38,7 @@ public class RangedEnemyAI : MonoBehaviour
         Physics2D.IgnoreLayerCollision(10,11);// inogres collisions enemy and enemyProcjectile
 
         seeker = GetComponent<Seeker>();
+        target = GameObject.FindWithTag("Player").GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
        // GFX = GetComponentInParent<SpriteRenderer>();//NOT SAFE but will do for now sorry
 
