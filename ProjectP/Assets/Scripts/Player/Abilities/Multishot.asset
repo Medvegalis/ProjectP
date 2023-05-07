@@ -16,6 +16,7 @@ MonoBehaviour:
   explanation: Your projectile weapons will shoot two additional projectiles per
     level
   id: 0
+  isEnabled: 1
   currentLevel: 1
   maxLevel: 3
   valuePerLevel: 2

@@ -107,7 +107,7 @@ MonoBehaviour:
   baseWeaponProjectileSpeed: 10
   baseProjectileCount: 1
   attackCooldown: 0.2
-  multipleProjectileAngleIncrement: 5
+  multipleProjectileAngleIncrement: 10
   projectileCount: 0
   weaponProjectileSpeed: 15
   canAttack: 0

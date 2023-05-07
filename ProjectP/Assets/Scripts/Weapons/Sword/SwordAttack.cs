@@ -15,14 +15,16 @@ public class SwordAttack : MonoBehaviour, IHasAttack
     [SerializeField]
     private float knockback = 5f;
 
-    PlayerControls controls;
-    BoxCollider2D swordHitbox;
+    private PlayerControls controls;
+    private BoxCollider2D swordHitbox;
+    private AudioSource audioSource;
 
     public bool canAttack;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         controls = new PlayerControls();
         swordHitbox = gameObject.GetComponent<BoxCollider2D>();
         for (int i = 0; i < swordAttacks.Length; i++)
@@ -52,6 +54,7 @@ public class SwordAttack : MonoBehaviour, IHasAttack
         }
 
         var animator = player.GetComponent<Animator>();
+        audioSource.Play();
         animator.SetTrigger("AttackWithSword");
     }
 

@@ -8,15 +8,15 @@ public class AbilityControler : MonoBehaviour
     private Ability[] abilities;
     public int abiltyCount;
 
-    [SerializeField]
-    private Ability[] enabledAbilities;
-    public int enabledAbilityCount;
-
     // Start is called before the first frame update
     void Start()
     {
         abiltyCount = abilities.Length;
-        enabledAbilityCount = 0;
+		foreach (Ability ability in abilities)
+		{
+            ability.disableAbility();
+            ability.SetLevel(1);
+		}
     }
 
     // Update is called once per frame
@@ -25,31 +25,58 @@ public class AbilityControler : MonoBehaviour
         
     }
 
-    public void enableAbility(int abilityId) 
+    public void enableOrLevelUpAbility(int abilityId) 
     {
-		if (abilityId >= abiltyCount || abilityId < 0)
-		{
+        int index = findAbilityIndexByID(abilityId);
+        if (index < 0)
+        {
             return;
+        }
+
+        Ability ability = abilities[index];
+
+        if (ability.abilityIsEnabled())
+        {
+            ability.LevelUp();
+        }
+        else 
+        {
+            ability.enableAbility();
+        }
+    }
+
+    public void enableAbility(int abilityId)
+    {
+        int index = findAbilityIndexByID(abilityId);
+        if (index < 0)
+        {
+            return;
+        }
+
+        abilities[index].enableAbility();
+    }
+
+    public Ability getAbility(int abilityId)
+    {
+        int index = findAbilityIndexByID(abilityId);
+        if (index < 0)
+        {
+            return null;
+        }
+        return abilities[index];
+    }
+
+    private int findAbilityIndexByID(int abilityId) 
+    {
+        int abilityIndex = -1;
+		for (int i = 0; i < abilities.Length; i++)
+		{
+			if (abilities[i].GetId() == abilityId)
+			{
+                abilityIndex = i;
+                break;
+			}
 		}
-
-        enabledAbilities[enabledAbilityCount++] = abilities[abilityId];
-    }
-
-    public Ability getAbility(int abilityId) 
-    {
-        if (abilityId > abiltyCount || abilityId < 0)
-        {
-            return null;
-        }
-        return abilities[abilityId];
-    }
-
-    public Ability getEnabledAbility(int abilityId)
-    {
-        if (abilityId > enabledAbilityCount || abilityId < 0)
-        {
-            return null;
-        }
-        return enabledAbilities[abilityId];
+        return abilityIndex;
     }
 }

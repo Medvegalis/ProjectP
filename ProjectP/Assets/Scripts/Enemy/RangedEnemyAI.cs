@@ -15,6 +15,9 @@ public class RangedEnemyAI : MonoBehaviour
 
     [SerializeField] public Animator animator;
 
+    [SerializeField]
+    private AudioSource shootingAudioSourceMain;
+
     public SpriteRenderer GFX;
 
     private Path path;
@@ -86,6 +89,7 @@ public class RangedEnemyAI : MonoBehaviour
 
             if (shootCooldown <= 0)
             {
+                shootingAudioSourceMain.Play();
                 Instantiate(bullet, transform.position, transform.rotation);
                 shootCooldown = defaultShootCooldown;
             }

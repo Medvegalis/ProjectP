@@ -21,6 +21,8 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+    private WalkingSoundController walkingSoundScript;
+
     bool isBeingSlowed = false;
 
     private float slowAmount;
@@ -30,6 +32,7 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
         playerControls = new PlayerControls();
         playerRB = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(6,7);
+        walkingSoundScript = GetComponentInChildren<WalkingSoundController>();
     }
 
     private void OnEnable()
@@ -53,9 +56,29 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
         movementDirection.x = Input.GetAxisRaw("Horizontal");
         movementDirection.y = Input.GetAxisRaw("Vertical");
 
+		
+
         animator.SetFloat("Horizontal", movementDirection.x);
         animator.SetFloat("Vertical", movementDirection.y);
         animator.SetFloat("Speed", movementDirection.sqrMagnitude);
+
+        if (movementDirection.x != 0 || movementDirection.y != 0)
+        {
+            playWalkingSoundEffect();
+        }
+    }
+
+    private void playWalkingSoundEffect() 
+    {
+		if (walkingSoundScript == null)
+		{
+            return;
+		}
+        if (walkingSoundScript.stepSoundIsPlaying())
+        {
+            return;
+        }
+        walkingSoundScript.playStepSound();
     }
 
     public void LoadData(GameData data)

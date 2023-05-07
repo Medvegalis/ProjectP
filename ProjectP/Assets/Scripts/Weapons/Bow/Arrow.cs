@@ -69,6 +69,7 @@ public class Arrow : MonoBehaviour
         audioSource.Play();
         arrowSpeed = 0;
         arrowRigidBody.bodyType = RigidbodyType2D.Static;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Destroy(gameObject, destroyTimer);
     }
 

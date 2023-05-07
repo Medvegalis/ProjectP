@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossbowAttack : MonoBehaviour, IHasAttack
+public class CrossbowAttack : MonoBehaviour, IHasAttack, IIsRotatable
 {
     [Header("Setup data")]
     public GameObject CrossbowShotPrefab;

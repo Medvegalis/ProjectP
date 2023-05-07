@@ -76,6 +76,6 @@ public class AbilitiesManagerUI : MonoBehaviour
 
     public void PickAbility(int buttonIndex)
     {
-        abilityControler.enableAbility(abilitiesToAdd[buttonIndex].GetId());
+        abilityControler.enableOrLevelUpAbility(abilitiesToAdd[buttonIndex].GetId());
     }
 }

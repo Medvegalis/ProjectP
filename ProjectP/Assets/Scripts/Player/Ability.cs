@@ -15,6 +15,8 @@ public class Ability : ScriptableObject
     [SerializeField]
     private int id;
     [SerializeField]
+    private bool isEnabled;
+    [SerializeField]
     private int currentLevel;
     [SerializeField]
     private int maxLevel;
@@ -26,11 +28,12 @@ public class Ability : ScriptableObject
     public Ability() 
     {
         currentLevel = 1;
+        isEnabled = false;
     }
 
     public void LevelUp()
     {
-        if (currentLevel < maxLevel)
+        if (currentLevel <= maxLevel)
         {
             currentLevel++;
         }
@@ -59,5 +62,19 @@ public class Ability : ScriptableObject
     public int GetId()
     {
         return id;
+    }
+    public bool abilityIsEnabled()
+    {
+        return isEnabled;
+    }
+
+    public void enableAbility() 
+    {
+        isEnabled = true;
+    }
+
+    public void disableAbility()
+    {
+        isEnabled = false;
     }
 }

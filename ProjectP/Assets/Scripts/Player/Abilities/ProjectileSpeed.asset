@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Projectile speed increase
   explanation: Increases the speed of your projectiles fired by weapons
   id: 1
+  isEnabled: 1
   currentLevel: 1
   maxLevel: 3
   valuePerLevel: 10

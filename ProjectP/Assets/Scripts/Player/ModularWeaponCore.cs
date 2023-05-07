@@ -118,7 +118,10 @@ public class ModularWeaponCore : MonoBehaviour
         {
             return;
         }
-
+		if (currentWeapon.GetComponent<IIsRotatable>() == null)
+		{
+            return;
+		}
         float angle = Utility.AngleTowardsMouse(currentWeapon.transform.position);
         currentWeapon.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
     }
@@ -225,6 +228,7 @@ public class ModularWeaponCore : MonoBehaviour
     //logic to check if player is standing on weapon
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.gameObject.name);
         if (collision.transform.tag == "Weapon")
         {
             standingOnWeapon = true;

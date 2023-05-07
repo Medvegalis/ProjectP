@@ -6,6 +6,13 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private bool isInvincible = false;
     [SerializeField] private float hurtSpriteColorChangeTime = .2f;
+
+    [SerializeField]
+    private AudioSource takingDamageAudioSourceMain;
+    [SerializeField]
+    private AudioSource takingDamageAudioSourceAlternate;
+
+    private bool alternateDamageSound;
     private bool gotHurt;
     private float timeSinceHurt;
     public int health;
@@ -15,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         //spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
+        alternateDamageSound = false;
         gotHurt = false;
     }
 
@@ -38,6 +46,18 @@ public class EnemyHealth : MonoBehaviour
 
         if (health > 0)
         {
+            
+			if (alternateDamageSound)
+			{
+                takingDamageAudioSourceAlternate.Play();
+                alternateDamageSound = false;
+            }
+			else
+			{
+                takingDamageAudioSourceMain.Play();
+                alternateDamageSound = true;
+			}
+
             health -= damageAmount;
             spriteRenderer.color = Color.red;
             gotHurt = true;

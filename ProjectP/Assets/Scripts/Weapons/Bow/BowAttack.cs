@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
+public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack, IIsRotatable
 {
     [Header("Setup data")]
     public GameObject ArrowPrefab;
@@ -137,13 +137,15 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
             return;
         }
 
-        int abilityIndex = checkForAbilityIdInEnabledAbilities(0);
-        if (abilityIndex == -1)
+        Ability projectileAbility = abilityScript.getAbility(0);
+        if (projectileAbility == null)
         {
             return;
         }
-
-        Ability projectileAbility = abilityScript.getEnabledAbility(abilityIndex);
+        if (!projectileAbility.abilityIsEnabled())
+        {
+            return;
+        }
 
         projectileCount = baseProjectileCount + ((int)projectileAbility.GetValuePerLevel() * projectileAbility.GetLevel());
     }
@@ -160,31 +162,17 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack
             return;
         }
 
-        int abilityIndex = checkForAbilityIdInEnabledAbilities(1);
-        if (abilityIndex == -1)
-        {
+        Ability projectileAbility = abilityScript.getAbility(1);
+		if (projectileAbility == null)
+		{
             return;
-        }
-
-        Ability projectileAbility = abilityScript.getEnabledAbility(abilityIndex);
+		}
+        if (!projectileAbility.abilityIsEnabled())
+		{
+            return;
+		}
 
         weaponProjectileSpeed = baseWeaponProjectileSpeed + (projectileAbility.GetValuePerLevel() * projectileAbility.GetLevel());
-    }
-
-    private int checkForAbilityIdInEnabledAbilities(int abilityId)
-    {
-        int abilityCount = abilityScript.enabledAbilityCount;
-        int projectileAbilityIndex = -1;
-        for (int i = 0; i < abilityCount; i++)
-        {
-            Ability ability = abilityScript.getEnabledAbility(i);
-            if (ability.GetId() == abilityId)
-            {
-                projectileAbilityIndex = i;
-                break;
-            }
-        }
-        return projectileAbilityIndex;
     }
 
     public void EnableAttack()
