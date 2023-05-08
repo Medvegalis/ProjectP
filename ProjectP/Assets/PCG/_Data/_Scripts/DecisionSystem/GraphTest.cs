@@ -11,6 +11,7 @@ public class GraphTest : MonoBehaviour
 
     Dictionary<Vector2Int, int> dijkstraResult;
     int highestValue;
+    Vector2Int furthestPos;
 
     public void RunDijkstraAlgorithm(Vector2Int playerPosition,IEnumerable<Vector2Int> floorPositions)
     {
@@ -19,6 +20,22 @@ public class GraphTest : MonoBehaviour
         dijkstraResult = DijkstraAlgorithm.Dijkstra(graph, playerPosition);
         highestValue = dijkstraResult.Values.Max();
         graphReady = true;
+    }
+
+    public Vector2Int furthestPlayerPoint() 
+    {
+        if(graphReady && dijkstraResult != null) {
+            foreach(var item in dijkstraResult) 
+                    {
+                        if(item.Value == highestValue) 
+                        {
+                            furthestPos = item.Key;
+                            break;
+                        }
+                    }
+        }
+
+        return furthestPos;
     }
 
 

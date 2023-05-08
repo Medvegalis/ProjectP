@@ -15,8 +15,10 @@ public class RoomContentGenerator : MonoBehaviour
     [SerializeField]
     private GraphTest graphTest;
 
-
     public Transform itemParent;
+
+    [SerializeField]
+    public GameObject portal;
 
     [SerializeField]
     private CinemachineVirtualCamera cinemachineCamera;
@@ -68,6 +70,13 @@ public class RoomContentGenerator : MonoBehaviour
             );
 
         FocusCameraOnThePlayer(placedPrefabs[placedPrefabs.Count - 1].transform);
+        
+        Vector2 furthestPoint = graphTest.furthestPlayerPoint();
+        
+        PrefabPlacer placer = new PrefabPlacer();
+        GameObject portalObject = placer.CreateObject(portal, furthestPoint);
+
+        //Instantiate(portal, furthestPoint, Quaternion.identity);
 
         spawnedObjects.AddRange(placedPrefabs);
 
