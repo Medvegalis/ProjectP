@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StatGem
   m_EditorClassIdentifier: 
   lootType: 2
-  lootSprite: {fileID: 0}
+  lootSprite: {fileID: 3136550281646277714, guid: a0d3fbbc155eb404a87f827b40a48dfe, type: 3}
   lootName: StatGem
-  dropChance: 1
+  dropChance: 100
   value: 1

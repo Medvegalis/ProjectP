@@ -39,6 +39,11 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    public void setInvincible(bool state)
+    {
+        isInvincible = state;
+    }
+
     public void DamageEnemy(int damageAmount)
     {
         if (isInvincible)
@@ -46,6 +51,9 @@ public class EnemyHealth : MonoBehaviour
 
         if (health > 0)
         {
+            health -= damageAmount;
+            spriteRenderer.color = Color.red;
+            gotHurt = true;
             
 			if (alternateDamageSound)
 			{
@@ -58,9 +66,6 @@ public class EnemyHealth : MonoBehaviour
                 alternateDamageSound = true;
 			}
 
-            health -= damageAmount;
-            spriteRenderer.color = Color.red;
-            gotHurt = true;
         }
             
 

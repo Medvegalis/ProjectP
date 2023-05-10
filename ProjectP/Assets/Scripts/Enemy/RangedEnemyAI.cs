@@ -38,7 +38,7 @@ public class RangedEnemyAI : MonoBehaviour
     void Start()
     {
         
-        Physics2D.IgnoreLayerCollision(10,11);// inogres collisions enemy and enemyProcjectile
+        Physics2D.IgnoreLayerCollision(10,11);// ignores collisions enemy and enemyProjectile
 
         seeker = GetComponent<Seeker>();
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();

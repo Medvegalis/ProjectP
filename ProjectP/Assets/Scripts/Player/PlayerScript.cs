@@ -48,7 +48,6 @@ public class PlayerScript : MonoBehaviour
     {
         Collectable.OnCollected += IncreaseLevel;
         Collectable.OnCollected += Heal;
-        EnemyProjectileScript.onHit += DamagePlayer;
 
     }
     void Update() {
@@ -78,7 +77,7 @@ public class PlayerScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if(coll.transform.tag == "Enemy")
+        if(coll.transform.tag == "Enemy" || coll.transform.tag == "EnemyProjectile")
         {
             IsBeingHit = true;
         }
@@ -86,7 +85,7 @@ public class PlayerScript : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D coll)
     {
-        if(coll.transform.tag == "Enemy")
+        if(coll.transform.tag == "Enemy" || coll.transform.tag == "EnemyProjectile")
         {
             IsBeingHit = false;
         }
@@ -144,6 +143,7 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
+        IsBeingHit = false;
         StartCoroutine(BecomeInvincible());
     }
 
