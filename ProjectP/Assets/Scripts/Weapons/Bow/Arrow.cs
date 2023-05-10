@@ -30,17 +30,17 @@ public class Arrow : MonoBehaviour
         arrowRigidBody.velocity = (Vector2)transform.up * arrowSpeed;
     }
 
-	private void OnTriggerEnter2D(Collider2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.isTrigger)
+/*        if (collision.isTrigger)
         {
             return;
-        }
+        }*/
 
         switch (collision.transform.tag)
         {
             //if the other rigid body has enemy tag try to deal damage
-            case "Enemy": DamageEnemy(collision); break;
+            case "Enemy": DamageEnemy(collision.collider); break;
             // if it hit terrain make it linger for a bit and destroy it
             case "Terrain": TerrainHitResolve(); break;
             default: break;

@@ -37,6 +37,6 @@ public class PortalScript : MonoBehaviour
         yield return new WaitForSeconds(teleportDelay);
 
         yield return new WaitForSeconds(0.05f);
-        SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(sceneBuildIndex, LoadSceneMode.Single);
     }
 }

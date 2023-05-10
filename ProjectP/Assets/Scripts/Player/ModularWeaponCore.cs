@@ -228,7 +228,6 @@ public class ModularWeaponCore : MonoBehaviour
     //logic to check if player is standing on weapon
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.transform.tag == "Weapon")
         {
             standingOnWeapon = true;

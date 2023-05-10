@@ -56,15 +56,20 @@ public class PlayerControler : MonoBehaviour, IDataPersistence
         movementDirection.x = Input.GetAxisRaw("Horizontal");
         movementDirection.y = Input.GetAxisRaw("Vertical");
 
-		
 
-        animator.SetFloat("Horizontal", movementDirection.x);
-        animator.SetFloat("Vertical", movementDirection.y);
-        animator.SetFloat("Speed", movementDirection.sqrMagnitude);
+        if (Time.timeScale != 0)
+        {
+            animator.SetFloat("Horizontal", movementDirection.x);
+            animator.SetFloat("Vertical", movementDirection.y);
+            animator.SetFloat("Speed", movementDirection.sqrMagnitude);
+        }
 
         if (movementDirection.x != 0 || movementDirection.y != 0)
         {
-            playWalkingSoundEffect();
+            if (Time.timeScale != 0)
+            {
+                playWalkingSoundEffect();
+            }
         }
     }
 

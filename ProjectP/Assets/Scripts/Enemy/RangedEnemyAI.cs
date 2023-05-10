@@ -18,6 +18,8 @@ public class RangedEnemyAI : MonoBehaviour
     [SerializeField]
     private AudioSource shootingAudioSourceMain;
 
+    private EnemyHealth health;
+
     public SpriteRenderer GFX;
 
     private Path path;
@@ -37,6 +39,7 @@ public class RangedEnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = GetComponent<EnemyHealth>();
         
         Physics2D.IgnoreLayerCollision(10,11);// ignores collisions enemy and enemyProjectile
 
@@ -50,6 +53,11 @@ public class RangedEnemyAI : MonoBehaviour
 
     private void Update()
     {
+
+        if (!health.isFullHP)
+        {
+            hasEnteredRanged = true;
+        }
         Shoot();
 
         if (isInRange)

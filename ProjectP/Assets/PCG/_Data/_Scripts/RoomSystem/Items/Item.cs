@@ -20,8 +20,6 @@ public class Item : MonoBehaviour
     [SerializeField]
     private GameObject hitFeedback, destoyFeedback;
 
-    public UnityEvent OnGetHit { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
     public void Initialize(ItemData itemData)
     {
 
@@ -59,6 +57,14 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
             
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Projectile")
+        {
+            ReduceHealth();
+        }
     }
 }
 

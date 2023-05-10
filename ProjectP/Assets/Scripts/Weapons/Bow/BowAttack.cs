@@ -34,6 +34,8 @@ public class BowAttack : MonoBehaviour, IHasAttack, IHasProjectileAttack, IIsRot
 
     void Start()
     {
+        Physics2D.IgnoreLayerCollision(6,6);
+        Physics2D.IgnoreLayerCollision(6, 10);
         audioSource = GetComponent<AudioSource>();
         projectileCount = baseProjectileCount;
         weaponProjectileSpeed = baseWeaponProjectileSpeed;

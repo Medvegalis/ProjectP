@@ -32,7 +32,7 @@ public class UpgradeTable : MonoBehaviour, IDataPersistence
     public TextMeshProUGUI pointsText;
     public int pointsCount = 0;
 
-    private void Awake()
+    void Awake()
     {
         playerControls = new PlayerControls();
     }
@@ -64,6 +64,7 @@ public class UpgradeTable : MonoBehaviour, IDataPersistence
     {
         if(canInteract)
         {
+            
             if(playerControls.Player.Use.WasPerformedThisFrame())
             {
                 Debug.Log("UPGRADE MENU");

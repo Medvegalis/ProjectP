@@ -13,6 +13,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed = 200f;
     [SerializeField] private float nextWaypointDistace = 3f;
 
+    private EnemyHealth health;
+
     public Animator animator;
 
     private SpriteRenderer GFX;
@@ -28,19 +30,26 @@ public class EnemyAI : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
 
-    private void Update()
-    {
-        TPos = target.position;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<EnemyHealth>();
         GFX = GetComponentInChildren<SpriteRenderer>();//NOT SAFE but will do for now sorry
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
+    }
+
+    private void Update()
+    {
+        TPos = target.position;
+
+        if (!health.isFullHP)
+        {
+            Debug.Log("ASDSFADGSDGSF");
+            hasEnteredRanged = true;
+        }
     }
 
     private void UpdatePath()

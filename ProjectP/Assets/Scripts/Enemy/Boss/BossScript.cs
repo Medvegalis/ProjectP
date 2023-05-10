@@ -17,6 +17,8 @@ public class BossScript : MonoBehaviour
     private EnemyHealth healthScript;
     private int maxHealth;
 
+    public GameObject BossHpObject;
+
     private BossStages stage;
     public string stageS;
 
@@ -69,6 +71,8 @@ public class BossScript : MonoBehaviour
     {
         if (!FightStarted)
             return;
+
+        BossHpObject.SetActive(true);
 
         stageS = stage.ToString();
         switch(stage)

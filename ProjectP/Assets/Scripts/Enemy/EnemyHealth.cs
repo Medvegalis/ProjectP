@@ -16,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
     private bool gotHurt;
     private float timeSinceHurt;
     public int health;
+    public bool isFullHP = true;
 
     public SpriteRenderer spriteRenderer;
 
@@ -51,6 +52,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (health > 0)
         {
+            isFullHP = false;
             health -= damageAmount;
             spriteRenderer.color = Color.red;
             gotHurt = true;
