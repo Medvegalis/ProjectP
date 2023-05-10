@@ -16,6 +16,9 @@ Here is an unordered list of features and keywords that you can find in this gam
 # Credits
 We would like to thank:
 SunnyValleyStudio, based on his code and project package we were able to achieve a high quality level generator
+
 0x72 User on Itch.io for tileset in this project (Creative licence - Creative Commons Zero v1.0 Universal)
+
 <MUSIC>
+  
 <MUSIC>
