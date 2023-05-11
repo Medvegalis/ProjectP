@@ -1103,6 +1103,11 @@ MonoBehaviour:
   - {fileID: 2370936475272107853}
   selectedSlotBorderSprite: {fileID: 21300000, guid: 87c7c903e39143144950324091d588d3, type: 3}
   slotBorderSprite: {fileID: 21300000, guid: f49c81234f7d80343bda169431e17f4f, type: 3}
+  allWeapons:
+  - {fileID: 1497159223693097460, guid: da7378ddac473c64b9ba34cba6c10db1, type: 3}
+  - {fileID: 1709901185154884374, guid: 9c2a6b3e9dcaab346868c0cc517aef16, type: 3}
+  - {fileID: 5629188262575246671, guid: b898da5b4b52f424d871fbe4cf3f504a, type: 3}
+  - {fileID: 2763469876108106659, guid: d27f7b5e273ee0343b1ad9b10d941349, type: 3}
   WeaponPos: {fileID: 7907177946040644486}
   startingWeapon: {fileID: 1709901185154884374, guid: 9c2a6b3e9dcaab346868c0cc517aef16, type: 3}
   swapCooldown: 2
@@ -4525,9 +4530,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2370936475937429230}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DataPersistenceManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

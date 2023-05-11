@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.Rendering;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -16,13 +18,13 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
-        {
-            Debug.LogError("Found existing Data Persistence Manager in the scene. Destroyed the newest");
-            Destroy(this.gameObject);
-            return;
+        //if(instance != null)
+        //{
+        //    Debug.LogError("Found existing Data Persistence Manager in the scene. Destroyed the newest");
+        //    Destroy(this.gameObject);
+        //    return;
         
-        }
+        //}
         instance = this;
 
         DontDestroyOnLoad(this.gameObject);
@@ -35,6 +37,7 @@ public class DataPersistenceManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
 
     private void OnDisable()
@@ -45,8 +48,18 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+        StartCoroutine(nameof(onSceneDelay));
+
+    }
+
+    IEnumerator onSceneDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+        Debug.LogWarning("Loaded save data");
     }
 
     public void NewGame()

@@ -2,21 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityControler : MonoBehaviour
+public class AbilityControler : MonoBehaviour, IDataPersistence
 {
     [SerializeField]
     private Ability[] abilities;
+    private List<Ability> enabledAbilities;
     public int abiltyCount;
 
     // Start is called before the first frame update
     void Start()
     {
+        // enabledAbilities = new List<Ability>();
+        StartCoroutine(nameof(StartDelayed));
+    }
+
+    IEnumerator StartDelayed() 
+    {
+        yield return new WaitForSeconds(0.6f);
         abiltyCount = abilities.Length;
-		foreach (Ability ability in abilities)
-		{
-            ability.disableAbility();
-            ability.SetLevel(1);
-		}
+
+        foreach (Ability ability in abilities)
+        {
+            if (!enabledAbilities.Contains(ability))
+            {
+                ability.disableAbility();
+                ability.SetLevel(1);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -42,6 +54,7 @@ public class AbilityControler : MonoBehaviour
         else 
         {
             ability.enableAbility();
+            enabledAbilities.Add(ability);
         }
     }
 
@@ -78,5 +91,15 @@ public class AbilityControler : MonoBehaviour
 			}
 		}
         return abilityIndex;
+    }
+
+    public void LoadData(GameData data)
+    {
+        enabledAbilities = data.activeAbilities;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.activeAbilities = enabledAbilities;
     }
 }

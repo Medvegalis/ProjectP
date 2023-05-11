@@ -39,7 +39,16 @@ public class UpgradeTable : MonoBehaviour, IDataPersistence
 
     void Start()
     {
+
         Collectable.OnCollected += PointColleted;
+
+        StartCoroutine(nameof(StartDelayed));
+
+        pointsText.text = pointsCount.ToString();
+    }
+    IEnumerator StartDelayed()
+    {
+        yield return new WaitForSeconds(0.6f);
 
         maxHealthLevel = playerScript.maxHealth.maxLevel;
         maxDamageLevel = playerScript.damage.maxLevel;
@@ -59,8 +68,8 @@ public class UpgradeTable : MonoBehaviour, IDataPersistence
 
         pointsText.text = pointsCount.ToString();
     }
+   private void Update()
 
-    private void Update()
     {
         if(canInteract)
         {

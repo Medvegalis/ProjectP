@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
-public class ModularWeaponCore : MonoBehaviour
+public class ModularWeaponCore : MonoBehaviour, IDataPersistence
 {
     [Header("Weapon slots")]
     public Image[] slots;
     public Image[] slotBorders;
     public Sprite selectedSlotBorderSprite;
     public Sprite slotBorderSprite;
+
+    public List<GameObject> allWeapons;
 
 
     private PlayerControls playerControls;
@@ -43,19 +46,36 @@ public class ModularWeaponCore : MonoBehaviour
     public bool standingOnWeapon;
     public GameObject weaponOnGround;
 
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
+
     void Start()
     {
         maxWeaponCount = weapons.Length;
         //weapon swap logic
         canSwap = true;
         swapOnCooldown = false;
-        weapons[0] = startingWeapon;
-        playerControls = gameObject.GetComponent<PlayerControler>().playerControls;
-        currentWeaponIndex = 0;
-        InstantiateWeapon(startingWeapon);
+        if (weapons[0] == null)
+        {
+            weapons[0] = startingWeapon;
+            currentWeaponIndex = 0;
+            InstantiateWeapon(startingWeapon);
+        }
+        else
+        {
+            InstantiateWeapon(allWeapons[findInAllWeapons(weapons[0])]);
+            currentWeaponIndex = 0;
+        }
         //pick up logic
         standingOnWeapon = false;
         currentWeaponCount = 1;
+        if(weapons.Count() > 0)
+        {
+            //InstantiateWeapon(weapons[1]);
+            currentWeaponCount = 2;
+        }
         //slotBorderSprite instantiation
         updateslotBorderSpriteVisuals();
     }
@@ -104,12 +124,24 @@ public class ModularWeaponCore : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
+
     // Aim at mouse logic
     private void WeaponRotateToLookAtMouse()
     {
         //var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         //var angle = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
         //weapon.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (currentWeapon == null)
+            return;
         if (!playerControls.Player.enabled)
         {
             return;
@@ -208,14 +240,26 @@ public class ModularWeaponCore : MonoBehaviour
         }
 
         Vector3 zeroPos = new Vector3(0, 0, 0);
-        weapons[currentWeaponCount++] = weaponOnGround;
+        weapons[currentWeaponCount++] = allWeapons[findInAllWeapons(weaponOnGround)];
         weaponOnGround.transform.position = zeroPos;
+    }
+
+    private int findInAllWeapons(GameObject weapon)
+    {
+        foreach (GameObject w in allWeapons)
+        {
+            if(w.name == weapon.name)
+            {
+                return allWeapons.IndexOf(w);
+            }
+        }
+        return -1;
     }
 
     private void replaceExistingWeapon() {
         Vector3 zeroPos = new Vector3(0, 0, 0);
 
-        weapons[currentWeaponIndex] = weaponOnGround;
+        weapons[currentWeaponIndex] = allWeapons[findInAllWeapons(weaponOnGround)];
         weaponOnGround.transform.position = zeroPos;
         Destroy(currentWeapon);
         InstantiateWeapon(weapons[currentWeaponIndex]);
@@ -265,5 +309,15 @@ public class ModularWeaponCore : MonoBehaviour
         currentWeapon.transform.SetParent(gameObject.transform);
         var attackScript = currentWeapon.GetComponent<IHasAttack>();
         attackScript.EnableAttack();
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.weapons = data.weaponList;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.weaponList = this.weapons;
     }
 }
