@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -8,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu instance { get; private set; }
 
     public GameObject pauseMenu;
+    public GameObject SaveButton;
     public bool isPaused;
 
     private void Awake()
@@ -27,6 +29,11 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+
+        if (SceneManager.GetActiveScene().name == "RoomContent")
+        {
+            SaveButton.GetComponent<Button>().interactable = false;
+        }
     }
 
     // Update is called once per frame

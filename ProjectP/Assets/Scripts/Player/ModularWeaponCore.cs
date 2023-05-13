@@ -53,31 +53,43 @@ public class ModularWeaponCore : MonoBehaviour, IDataPersistence
 
     void Start()
     {
+        StartCoroutine( nameof(StartDelayed));
+    }
+
+    IEnumerator StartDelayed()
+    {
+        yield return new WaitForSeconds(0.6f);
+
         maxWeaponCount = weapons.Length;
         //weapon swap logic
         canSwap = true;
         swapOnCooldown = false;
-        if (weapons[0] == null)
+
+        if (weapons[0] == null && weapons[1] == null)
         {
             weapons[0] = startingWeapon;
+            maxWeaponCount = weapons.Length;
             currentWeaponIndex = 0;
             InstantiateWeapon(startingWeapon);
+            Debug.LogWarning("no weapons found");
         }
         else
         {
             InstantiateWeapon(allWeapons[findInAllWeapons(weapons[0])]);
             currentWeaponIndex = 0;
+            Debug.LogWarning("weapons found");
         }
         //pick up logic
         standingOnWeapon = false;
         currentWeaponCount = 1;
-        if(weapons.Count() > 0)
+        if (weapons.Count() > 0)
         {
             //InstantiateWeapon(weapons[1]);
             currentWeaponCount = 2;
         }
         //slotBorderSprite instantiation
         updateslotBorderSpriteVisuals();
+
     }
 
 
