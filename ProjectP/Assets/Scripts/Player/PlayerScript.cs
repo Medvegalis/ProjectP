@@ -67,9 +67,6 @@ public class PlayerScript : MonoBehaviour, IDataPersistence
     }
     void Update() 
     {
-
-
-
         if (currentHealth > maxHealth.currentValue)
             currentHealth = maxHealth.currentValue;
 
@@ -125,8 +122,12 @@ public class PlayerScript : MonoBehaviour, IDataPersistence
             }
             else
             {
-                currentXP += value;
-                xpSlider.value = currentXP;
+                if (currentXP + value >= maxXP)
+                {
+
+                    currentXP += value;
+                    xpSlider.value = maxXP;
+                }
             }
         }
     }

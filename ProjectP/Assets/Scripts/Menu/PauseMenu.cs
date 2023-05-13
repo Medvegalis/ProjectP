@@ -34,6 +34,11 @@ public class PauseMenu : MonoBehaviour
         {
             SaveButton.GetComponent<Button>().interactable = false;
         }
+        else
+        {
+            SaveButton.GetComponent<Button>().interactable = true;
+
+        }
     }
 
     // Update is called once per frame

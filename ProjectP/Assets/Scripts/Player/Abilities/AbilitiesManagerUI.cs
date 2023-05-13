@@ -23,8 +23,8 @@ public class AbilitiesManagerUI : MonoBehaviour
 
         for(int i = 0; i < 3; i++)
         {
-            names[i].text = "Button";
-            description[i].text = "desc";
+            names[i].text = "Not implemented";
+            description[i].text = "...";
         }
 
         LoadAbilities();
