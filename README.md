@@ -1,5 +1,5 @@
 # ProjectP roque-like game
-Short project description: a 2D top down pixel art 16x16 game with randomly generated level layout. This game is a shooter type
+Short project description: a 2D top down pixel art 16x16 game with randomly generated level layout. This game is a shooter type. The main goal is to defeat the boss that is hidden in another dimension. The player spawns with a bow and has to defeat enemies in order to gain experience and skills. If the player fails to defeat the boss, he/she can try again in a different world. After defeating the boss, the player becomes more powerful and can try to complete the challenge once again
 
 # Main features of this game
 Here is an unordered list of features and keywords that you can find in this game:
@@ -27,4 +27,5 @@ SunnyValleyStudio, based on his code and project package we were able to achieve
 
 <MUSIC>
  Doom Style Industrial Metal - Torn Flesh by Karl Casey @ White Bat Audio
+ Ludum Dare 38 - Track Eight [game loop, free download] By Abstraction is licensed under a  Creative Commons License
 <MUSIC>
