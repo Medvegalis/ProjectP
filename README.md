@@ -13,6 +13,12 @@ Here is an unordered list of features and keywords that you can find in this gam
 * Boss fight
 * Pixel art animations
 
+# Architecture
+
+Since we used Unity engine, our architecture showcases hierarchy of C# scripts.
+
+![image](https://github.com/Medvegalis/ProjectP/assets/98412351/f6cdc29c-43ba-4b92-8b80-b95027d9c587)
+
 # Credits
 We would like to thank:
 SunnyValleyStudio, based on his code and project package we were able to achieve a high quality level generator
